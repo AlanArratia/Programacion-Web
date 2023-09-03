@@ -1,0 +1,48 @@
+.Elementos
+{
+    width: 100%;
+    border-collapse: collapse; 
+    margin-bottom: 20px; 
+}
+
+th {
+    background-color: #f2f2f2; 
+    text-align: left; 
+    padding: 10px; 
+}
+
+td {
+    border: 1px solid #dddddd; 
+    text-align: left; 
+    padding: 10px; 
+    
+}
+
+c:hover {
+    color: yellow;
+}
+
+button:active {
+    background-color: blue;
+}
+
+td:empty {
+    background-color: red; 
+}
+
+a:hover
+{
+    background-color: green; 
+}
+
+
+
+
+
+
+
+
+
+
+
+

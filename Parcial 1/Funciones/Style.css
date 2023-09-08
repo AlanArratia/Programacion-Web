@@ -1,0 +1,13 @@
+.contenedor{
+display: flex;
+}
+
+.caja{
+    width: calc((100% / 3) - 100px);
+    height: 250px;
+    background-color: white;
+    color: red;
+    
+    
+border: 1px solid black;
+}

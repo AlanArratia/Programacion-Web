@@ -1,0 +1,56 @@
+.static{
+    background: red;
+    position: static;
+}
+
+.absolute{
+    
+    position: absolute;
+    top: 81px;
+    left: 0px;
+}
+
+.absolute1{
+   
+    position: absolute;
+    top: 81px;
+    right: 0px;
+}
+
+
+.item{
+    width: 1500px;
+    height: 80px;
+    margin-bottom: 20px;
+    color: black;
+    font-size: 40px;
+    text-align: center;
+    background: lightblue;
+    line-height: 80px;
+}
+
+.item1{
+    width: 400px;
+    height: 1000px;
+    margin-bottom: 20px;
+    color: black;
+    font-size: 40px;
+    text-align: center;
+    background: lightgreen;
+    line-height: 80px;
+}
+
+.item2{
+    width: 1120px;
+    height: 1000px;
+    margin-bottom: 20px;
+    color: black;
+    font-size: 40px;
+    text-align: center;
+    background: lightgoldenrodyellow;
+    line-height: 80px;
+}
+
+
+
+

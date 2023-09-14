@@ -1,0 +1,25 @@
+.caja{
+    width: calc((100% / 3) - 100px);
+    height: 250px;
+    background-color: red;
+    color: red;
+    margin: 10px;
+    
+    
+border: 1px solid black;
+}
+
+#caja1:hover
+{
+    transform: rotate(45deg);
+}
+
+#caja2:hover
+{
+    transform: translateX(50px);
+}
+
+#caja3:hover
+{
+    transform: scale(2);
+}

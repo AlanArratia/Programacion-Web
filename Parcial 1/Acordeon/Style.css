@@ -18,13 +18,13 @@
 }
 
 #content {
-    overflow: both; /* Mostrar barras de desplazamiento automáticamente si es necesario */
+    overflow: both; 
 }
 
 #sidebar {
-    font-size: 20px; /* Tamaño de fuente reducido */
-    width: 40%; /* Ancho del sidebar reducido */
-    left: 0%; /* Alineación izquierda del sidebar */
+    font-size: 20px; 
+    width: 40%; 
+    left: 0%; 
 }
 
 .submenu{

@@ -59,6 +59,17 @@
     /*line-height: 80px;*/
 }
 
+input#toggle{
+    display: none;
+}
 
+input:checked+div#sidebar{
+    display: none;
+}
+
+
+input:checked+div#content{
+    width: 100%;
+}
 
 

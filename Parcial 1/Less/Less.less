@@ -55,7 +55,7 @@ div{
 }
 
 
-    @color-primario:green;
+    @color-primario:blue;
     @color-secundario:red;
 
 
@@ -65,17 +65,20 @@ body#contenedor{
 }
 /*
 input#tema:checked ~ #contenedor{
-    background-color: var(--color-secundario);
+    background-color: var(--color-secundario);  
 }*/
 
 body:has(#tema:checked) {
-    background-color: @color-secundario;
+    background-color: @color-primario;
 }
 
-div#menu{
+div.menu{
     font-family: 'courier new',courier,monospace;
     a{
-        color: red;
+        color: @color-secundario;   
     }
+    li{
+        color: @color-primario;
+    }
+    
 }
-

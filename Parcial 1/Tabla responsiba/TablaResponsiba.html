@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        *{
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        table{
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        table,thead,tbody,tr,th,td{
+            border: 1px solid black;
+        }
+
+        @media screen and(max-width:600px){
+            table,thead,tbody,tr,th,td{
+                display: block;
+            }
+            thead{
+                display: none;
+            }
+            td{
+                padding-left: 50%;
+            }
+
+            td:nth-child(1){padding-left: 0;text-align: center;background-color: blue;}
+            td:nth-child(2)::before{content:"Martes";position:absolute;left: 10px;}
+            td:nth-child(3)::before{content:"Miercoles";position:absolute;left: 10px;}
+            td:nth-child(4)::before{content:"Jueves";position:absolute;left: 10px;}
+            td:nth-child(5)::before{content:"Viernes";position:absolute;left: 10px;}
+        }
+    </style>
+</head>
+<body>
+    <table>
+        <thead>
+            <tr>
+                <th>Materia</th>
+                <th>Lunes</th>
+                <th>Martes</th>
+                <th>Miercoles</th>
+                <th>Jueves</th>
+                <th>Viernes</th>
+                
+
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th>Programacion web</th>
+                <th>7:00-8:00</th>
+                <th>7:00-8:00</th>
+                <th>7:00-8:00</th>
+                <th>7:00-8:00</th>
+                <th>7:00-8:00</th>
+
+                
+
+            </tr>
+
+            <tr>
+                <th>Fundamentos de telecomunicaciones</th>
+                <th>12:00-14:00</th>
+                <th></th>
+                <th>12:00-14:00</th>
+                <th></th>
+                <th></th>
+            </tr>
+
+                <tr>
+                <th>Sistemas operativos</th>
+                <th></th>
+                <th>8:00-10:00</th>
+                <th></th>
+                <th>8:00-10:00</th>
+                <th></th>
+            </tr>
+
+            <tr>
+                <tr>
+                    <th>Taller de base de datos</th>
+                    <th>14:00-15:00</th>
+                    <th>14:00-15:00</th>
+                    <th>14:00-15:00</th>
+                    <th>14:00-15:00</th>
+                    <th></th>
+            </tr>
+
+            <tr>
+                <th>Ingenieria de software</th>
+                    <th></th>
+                    <th>12:00-14:00</th>
+                    <th></th>
+                    <th>12:00-14:00</th>
+                    <th>13:00-14:00</th>
+
+            </tr>
+
+            <tr>
+                <th>Simulacion</th>
+                    <th>10:00-11:00</th>
+                    <th>10:00-11:00</th>
+                    <th>10:00-11:00</th>
+                    <th>10:00-11:00</th>
+                    <th>10:00-11:00</th>
+            </tr>
+
+
+            
+        </tbody>
+    </table>
+    
+</body>
+</html>

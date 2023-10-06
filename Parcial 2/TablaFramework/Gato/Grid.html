@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="Style.css">
+    <title>Grid</title>
+</head>
+<body>
+<div>
+    <Br></Br>
+    <Br></Br>
+    <Br></Br>
+</div>
+    <div id="cont" class="container">
+        <div id="caja1" class="caja"></div>
+        <div id="caja2" class="caja"></div>
+        <div id="caja3" class="caja"></div>
+        <div id="caja4" class="caja"></div>
+        <div id="caja5" class="caja"></div>
+        <div id="caja6" class="caja"></div>
+        <div id="caja7" class="caja"></div>
+        <div id="caja8" class="caja"></div>
+        <div id="caja9" class="caja"></div>
+    </div>
+    </div>
+    <script>
+        var xo="X"
+        document.getElementById("cont").addEventListener("click",function(e){
+            console.log(e.target.id);
+
+            if(document.getElementById(e.target.id).innerText==""){
+            if(xo=="X"){xo="O"} else{xo="X"}
+            document.getElementById(e.target.id).innerText=xo;
+            }
+        })
+    </script>
+</body>
+</html>

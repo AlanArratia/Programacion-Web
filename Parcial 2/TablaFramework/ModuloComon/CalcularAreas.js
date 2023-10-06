@@ -10,7 +10,3 @@ console.log("Área del triángulo:", areaTriangulo);
 console.log("Área del círculo:", areaCirculo);
 console.log("Área del rectángulo:", areaRectangulo);
 
-
-
-
-

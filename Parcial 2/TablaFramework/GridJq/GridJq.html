@@ -3,8 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="StyleGrid.css">
+    <link rel="stylesheet" href="Style.css">
     <title>Grid</title>
+    <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
 </head>
 <body>
     
@@ -26,37 +27,40 @@
     </div> 
     
     <script>
-        var xo="X";
 
 
+        var xo="X"
         document.getElementById("cont").addEventListener("click",function(e){
             console.log(e.target.id);
 
             if(document.getElementById(e.target.id).innerText==""){
             if(xo=="X"){xo="O"} else{xo="X"}
             document.getElementById(e.target.id).innerText=xo;
-            if(xo=="X"){
-                e.target.classList.add(xo,'jugador-x');
-            }
-            if(xo=="O"){
-                e.target.classList.add(xo,'jugador-o')
-            }
-            
             }
         })
 
        
 
 
-        document.getElementById("btnLim").addEventListener("click",function(e){
+        document.getElementById("btnLim").addEventListener("click",function(){
             let cajas = document.getElementsByClassName("caja");
 
             for(const elemento of cajas){
+                console.log(elemento);
                 elemento.innerText="";
-                elemento.classList.remove('jugador-x');
-                elemento.classList.remove('jugador-o');
             }
         })
+
+        $('document').ready(function(){
+            var xo="X";
+            $("#cont").click(function(e){
+                if($(e.target).text()==""){
+                    if(xo=="X"){XO="O"}else{xo="X"}
+                    $(e.target).text(xo);
+                }
+
+            });
+        });
 
 
     </script>

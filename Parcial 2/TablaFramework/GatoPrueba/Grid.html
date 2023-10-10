@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="StyleGrid.css">
+    <title>Grid</title>
+</head>
+<body>
+    
+    
+
+   <div id="cont" class="container">
+    <div id="caja1" class="caja" data-fila="0" data-columna="0"></div>
+    <div id="caja2" class="caja" data-fila="0" data-columna="1"></div>
+    <div id="caja3" class="caja" data-fila="0" data-columna="2"></div>
+    <div id="caja4" class="caja" data-fila="1" data-columna="0"></div>
+    <div id="caja5" class="caja" data-fila="1" data-columna="1"></div>
+    <div id="caja6" class="caja" data-fila="1" data-columna="2"></div>
+    <div id="caja7" class="caja" data-fila="2" data-columna="0"></div>
+    <div id="caja8" class="caja" data-fila="2" data-columna="1"></div>
+    <div id="caja9" class="caja" data-fila="2" data-columna="2"></div>
+    <div ></div>
+    <div id="caja11"><button id="btnLim" type="button">Limpiar</button></div>
+    <div></div>
+    <p id="mensajeGanador" style="display: none;">GANADOR</p>
+    </div> 
+    
+    <script>
+    var xo="X";
+    var tablero = [
+    ["", "", ""],
+    ["", "", ""],
+    ["", "", ""]
+];
+
+       function verificarGanador() {
+    // Comprobar filas, columnas y diagonales
+    for (let i = 0; i < 3; i++) {
+        // Comprobar filas
+        if (
+            tablero[i][0] !== "" &&
+            tablero[i][0] === tablero[i][1] &&
+            tablero[i][1] === tablero[i][2]
+        ) {
+            mostrarGanador(tablero[i][0]);
+            return;
+        }
+        // Comprobar columnas
+        if (
+            tablero[0][i] !== "" &&
+            tablero[0][i] === tablero[1][i] &&
+            tablero[1][i] === tablero[2][i]
+        ) {
+            mostrarGanador(tablero[0][i]);
+            return;
+        }
+    }
+
+    // Comprobar diagonales
+    if (
+        tablero[0][0] !== "" &&
+        tablero[0][0] === tablero[1][1] &&
+        tablero[1][1] === tablero[2][2]
+    ) {
+        mostrarGanador(tablero[0][0]);
+        return;
+    }
+    if (
+        tablero[0][2] !== "" &&
+        tablero[0][2] === tablero[1][1] &&
+        tablero[1][1] === tablero[2][0]
+    ) {
+        mostrarGanador(tablero[0][2]);
+        return;
+    }
+
+    // Comprobar empate
+    let empate = true;
+    for (let i = 0; i < 3; i++) {
+        for (let j = 0; j < 3; j++) {
+            if (tablero[i][j] === "") {
+                empate = false;
+                break;
+            }
+        }
+    }
+
+    if (empate) {
+        mostrarEmpate();
+    }
+}
+
+function mostrarGanador(ganador) {
+    document.getElementById("mensajeGanador").innerText = `¡${ganador} ha ganado!`;
+    document.getElementById("mensajeGanador").style.display = "block";
+    desactivarCajas();
+}
+
+function mostrarEmpate() {
+    document.getElementById("mensajeGanador").innerText = "¡Empate!";
+    document.getElementById("mensajeGanador").style.display = "block";
+    desactivarCajas();
+}
+
+function desactivarCajas() {
+    let cajas = document.getElementsByClassName("caja");
+    for (const elemento of cajas) {
+        elemento.removeEventListener("click", manejarClic);
+    }
+}
+
+function manejarClic(e) {
+    if (e.target.innerText === "") {
+        if (xo === "X") {
+            xo = "O";
+        } else {
+            xo = "X";
+        }
+        e.target.innerText = xo;
+        tablero[e.target.dataset.fila][e.target.dataset.columna] = xo;
+        e.target.classList.add(xo, "jugador-" + xo);
+        verificarGanador();
+    }
+}
+
+document.getElementById("cont").addEventListener("click", manejarClic);
+
+document.getElementById("btnLim").addEventListener("click", function (e) {
+    let cajas = document.getElementsByClassName("caja");
+    for (const elemento of cajas) {
+        elemento.innerText = "";
+        elemento.classList.remove('jugador-x', 'jugador-o');
+    }
+    tablero = [
+        ["", "", ""],
+        ["", "", ""],
+        ["", "", ""]
+    ];
+    document.getElementById("mensajeGanador").style.display = "none";
+    activarCajas();
+});
+
+function activarCajas() {
+    let cajas = document.getElementsByClassName("caja");
+    for (const elemento of cajas) {
+        elemento.addEventListener("click", manejarClic);
+    }
+}
+
+activarCajas();
+
+
+
+    </script>
+</body>
+</html>

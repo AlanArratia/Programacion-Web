@@ -1,0 +1,54 @@
+*{
+    padding: 0px;
+    margin: 0px !important;
+    
+}
+.container{
+    height: 100vh;
+    width: 100vw;
+    display:grid;
+    grid-template-columns: 200px 200px 200px;
+    grid-template-rows: 200px 200px 200px ;
+    justify-content: center;
+    grid-gap: 5px;
+   
+    
+    
+}   
+.caja {
+    background-color: white;
+    width: 200px;
+    height: 200px;
+    font-size: 50px;
+    justify-content: center;
+    text-align: center;
+    justify-self: center;
+    border: 3px solid white; 
+}
+
+button {
+    background-color: transparent; 
+    color: white; 
+    border: 2px solid white; 
+    padding: 5px 10px; 
+    cursor: pointer; 
+}
+
+.jugador-x{
+    Color: white
+    }
+
+.jugador-o{
+    Color: white
+    }
+
+
+
+
+
+
+#caja11{
+    align-self: center;
+    justify-self: center;
+    
+}

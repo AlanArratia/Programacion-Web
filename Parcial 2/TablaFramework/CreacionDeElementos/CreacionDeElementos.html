@@ -9,21 +9,48 @@
     <div id="contenedor"></div>
 
     <script>
-        let encabezados=['Nombre','ApellidoP','ApellidoM'];
+        let encabezados=['ID_Empleado','Nombre','ApellidoP','ApellidoM','Correo','Direccion','Telefono'];
         let datos=[{
+            ID_Empleado:"1",
             Nombre:"Alan",
             ApellidoP:"Arratia",
-            ApellidoM:"Hernandez"
+            ApellidoM:"Hernandez",
+            Correo:"halan3@hotmail.com",
+            Direccion:"Bolivar 5620",
+            Telefono:"8672061956"
         },{
-            Nombre:"Alan",
-            ApellidoP:"Arratia",
-            ApellidoM:"Hernandez"
+            ID_Empleado:"2",
+            Nombre:"Jesus",
+            ApellidoP:"Sampayo",
+            ApellidoM:"Cortes",
+            Correo:"JesusSampayo@hotmail.com",
+            Direccion:"Av.Monterrey 213",
+            Telefono:"8675479087"
         },{
-            Nombre:"Alan",
-            ApellidoP:"Arratia",
-            ApellidoM:"Hernandez"
+            ID_Empleado:"3",
+            Nombre:"David",
+            ApellidoP:"Compean",
+            ApellidoM:"Perez",
+            Correo:"DeividOfYisus@gmail.com",
+            Direccion:"Voluntad 128",
+            Telefono:"8672510101"
+        },{
+            ID_Empleado:"4",
+            Nombre:"Dariana",
+            ApellidoP:"Maltos",
+            ApellidoM:"Gonzalez",
+            Correo:"Lachinita@gmail.com",
+            Direccion:"Rio Bravo 103",
+            Telefono:"8672121516"
+        },{
+            ID_Empleado:"5",
+            Nombre:"Carlos",
+            ApellidoP:"Guzman",
+            ApellidoM:"Manrique",
+            Correo:"GuzmanCar12@hotmail.com",
+            Direccion:"Villas de San Miguel 709",
+            Telefono:"8671098745"
         }];
-
 
         let tab=document.createElement("table");
         let enc=document.createElement("thead");
@@ -33,39 +60,78 @@
             let th=document.createElement("th");
             th.innerText=elemento;
             fil.appendChild(th);
-
         });
 
         enc.appendChild(fil);
         tab.appendChild(enc);
 
-
-        tbody=document.createElement("tbody");
+        let tbody=document.createElement("tbody");
 
         datos.forEach(function(elemento){
-        let fila=document.createElement("tr");
+            let fila=document.createElement("tr");
 
-        let td1=document.createElement("td");
-        td1.innerText=elemento.Nombre;
-        fila.appendChild(td1);
+            let td0 = document.createElement("td");
+            td0.innerText = elemento.ID_Empleado;
+            fila.appendChild(td0);
 
-        let td2=document.createElement("td");
-        td2.innerText=elemento.ApellidoP;
-        fila.appendChild(td2);
+            let td1=document.createElement("td");
+            td1.innerText=elemento.Nombre;
+            fila.appendChild(td1);
 
-        let td3=document.createElement("td");
-        td3.innerText=elemento.ApellidoM;
-        fila.appendChild(td3);
+            let td2=document.createElement("td");
+            td2.innerText=elemento.ApellidoP;
+            fila.appendChild(td2);
 
-        tbody.appendChild(fila);
+            let td3=document.createElement("td");
+            td3.innerText=elemento.ApellidoM;
+            fila.appendChild(td3);
 
-    });
+            let td4=document.createElement("td");
+            td4.innerHTML=elemento.Correo;
+            fila.appendChild(td4);
 
-    
+            let td5=document.createElement("td");
+            td5.innerHTML=elemento.Direccion;
+            fila.appendChild(td5);
 
-    tab.appendChild(tbody);
+            let td6=document.createElement("td");
+            td6.innerHTML=elemento.Telefono;
+            fila.appendChild(td6);
 
+            tbody.appendChild(fila);
+        });
+
+        tab.appendChild(tbody);
+        
+        // Agrega la tabla al contenedor
         document.getElementById("contenedor").appendChild(tab);
+
+        // Aplicar estilos después de que se haya creado la tabla y las celdas
+        tab.style.border = "1px solid #000";
+        tab.style.width = "100%";
+
+        let celdas = document.querySelectorAll("table tbody td");
+        celdas.forEach(function(celda) {
+            celda.style.padding = "8px";
+            celda.style.border = "1px solid #000";
+            celda.style.textAlign = "center";
+
+            // Estilos para hover
+            celda.addEventListener('mouseover', function() {
+                celda.style.backgroundColor = "#e0e0e0";
+            });
+
+            celda.addEventListener('mouseout', function() {
+                celda.style.backgroundColor = "";
+            });
+        });
+
+        let encabezado = document.querySelector("table thead");
+        encabezado.style.backgroundColor = "#333";
+        encabezado.style.color = "#fff";
+        encabezado.style.fontWeight = "bold";
+
     </script>
 </body>
 </html>
+

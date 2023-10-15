@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="Style.css">
+    <!-- Agrega SweetAlert2 CSS y JavaScript -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+
+</head>
+<body>
+    <div id="cont" class="contenedor">
+        <div id="caja1" class="caja"></div>
+        <div id="caja2" class="caja"></div>
+        <div id="caja3" class="caja"></div>
+        <div id="caja4" class="caja"></div>
+        <div id="caja5" class="caja"></div>
+        <div id="caja6" class="caja"></div>
+        <div id="caja7" class="caja"></div>
+        <div id="caja8" class="caja"></div>
+        <div id="caja9" class="caja"></div>
+        <div ></div>
+        <div id="caja11"><button id="btnLim" type="button">Limpiar</button></div>
+        <div></div>
+    </div> 
+</body>
+<script>
+    var XO = "X";
+var juegoTerminado = false;
+
+
+document.getElementById("cont").addEventListener("click", function (e) {
+  if (juegoTerminado) {
+      return; // No hacer nada si el juego ha terminado
+  }
+
+  if (e.target.classList.contains("caja")) {
+      if (e.target.innerText == "") {
+          if (XO == "X") {
+              XO = "O";
+          } else {
+              XO = "X";
+          }
+          e.target.innerText = XO;
+
+          if (verificarGanador()) {
+              swal("¡Ganador!", "¡Gana el jugador: " + XO + "!", "success");
+          }
+      }
+  }
+});
+
+
+document.getElementById("btnLim").addEventListener("click", function () {
+    let cajas = document.getElementsByClassName("caja");
+    for (const elemento of cajas) {
+        elemento.innerText = "";
+        XO = "X";
+    }
+    juegoTerminado = false; // Reiniciar el juego
+    // Limpiar el mensaje del ganador
+    document.getElementById("mensajeGanador").innerText = "";
+});
+
+// Función para verificar si alguien ha ganado
+function verificarGanador() {
+  const cajas = document.getElementsByClassName("caja");
+  const combinacionesGanadoras = [
+      [0, 1, 2],
+      [3, 4, 5],
+      [6, 7, 8],
+      [0, 3, 6],
+      [1, 4, 7],
+      [2, 5, 8],
+      [0, 4, 8],
+      [2, 4, 6]
+  ];
+
+  for (const combinacion of combinacionesGanadoras) {
+      const [a, b, c] = combinacion;
+      if (
+          cajas[a].innerText !== "" &&
+          cajas[a].innerText === cajas[b].innerText &&
+          cajas[a].innerText === cajas[c].innerText
+      ) {
+          juegoTerminado = true;
+          Swal.fire({
+            title: '¡Ganador!',
+            text: `¡Gana el jugador: ${XO}!`,
+            icon: 'success',
+            confirmButtonText: 'OK'
+          });
+          return true;
+      }
+  }
+
+  if ([...cajas].every(caja => caja.innerText !== "")) {
+      juegoTerminado = true;
+      Swal.fire({
+        title: '¡Empate!',
+        text: 'El juego ha terminado en empate.',
+        icon: 'info',
+        confirmButtonText: 'OK'
+      });
+  }
+
+  return false;
+}
+
+    
+</script>
+</html>

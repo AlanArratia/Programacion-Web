@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button id="btn">Peticion XmlHttpRequest</button>
+    <div id="chuck"></div>
+    <script>
+         document.getElementById("btn").addEventListener("click", () => {
+            
+
+        const xhr = new XMLHttpRequest();
+       
+        
+        xhr.addEventListener("readystatechange", function () {
+        if (this.readyState === this.DONE) {
+            console.log(this.responseText);
+            let objectoRespuesta=JSON.parse(this.responseText)
+            console.log(objectoRespuesta.value);
+            const imagenes = objectoRespuesta.filter(objeto => objeto.image).map(objeto => objeto.image);
+            console.log(imagenes);
+
+
+            // A continuación, elige un índice aleatorio de la lista de imágenes.
+            const indiceAleatorio = Math.floor(Math.random() * imagenes.length);
+
+            // Finalmente, obtén la URL de la imagen aleatoria seleccionada.
+            const imagenAleatoria = imagenes[indiceAleatorio];
+
+            console.log(imagenAleatoria);
+
+            
+            const imgElement = document.createElement("img");
+            const chuckDiv = document.getElementById("chuck");
+            imgElement.src = imagenAleatoria+"/high.webp";
+            chuckDiv.innerHTML = '';
+            chuckDiv.appendChild(imgElement);
+           /*  document.getElementById("chuck").innerText=objectoRespuesta.image; */
+        }
+        });
+
+            xhr.open("GET", "https://api.tcgdex.net/v2/es/cards");
+
+            xhr.send();
+        });
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.7.1.js"
+    integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</head>
+<style>
+    @import url('https://fonts.cdnfonts.com/css/pokemon-solid');
+    *{
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+    }
+    img{
+        height: 510px;
+        width: 360px;
+    }
+    .cont{
+            height: 100%;
+            width: 100%;
+            background-image: url("https://3fc4ed44-3fbc-419a-97a1-a29742511391.selcdn.net/coub_storage/coub/simple/cw_image/c9b5a8616d2/edc6a510487ddc8d9b80c/1587331794_00020.jpg");
+            display: grid;
+            grid-template-columns: 200px 200px 200px 200px 200px;
+            grid-template-rows: 110px 15px 500px;
+            justify-content: center;
+            align-items: stretch;
+            justify-items: stretch;
+            font-family: 'Pokemon Solid', sans-serif;
+            background-size: cover;
+            background-repeat: no-repeat;
+    }
+    .cajacarta{
+        grid-row: 3;
+        grid-column-start: 1;
+            grid-column-end: 3;
+            align-self: center;
+            justify-self: center;
+    }
+    .boton1{
+        font-family: 'Pokemon Solid', sans-serif;
+        font-size: 18px;
+    }
+    .desc{
+        grid-row: 3;
+        grid-column-start: 3;
+        grid-column-end: 6;
+        align-self: center;
+        justify-self: center;
+        text-align: center;
+        font-size: 1.25em;
+    }
+    h1{
+        font-size: 2.25em;
+        color:#ffcc03;
+        -webkit-text-stroke-width: 1px;
+        -webkit-text-stroke-color: #3068B2;
+    }
+    p{
+        color:#ffcc03;
+        -webkit-text-stroke-width: 1px;
+        -webkit-text-stroke-color: #3068B2;
+        line-height: 175%;
+    }
+</style>
+<body class="cont">
+
+    <button id="btn" class="boton1">Carta aleatoria XmlHttpRequest</button>
+    <button id="btnFetch" class="boton1">Carta aleatoria Peticion Fetch </button>
+    <button id="btnAsyc" class="boton1">Carta aleatoria Peticion Async </button>
+    <button id="btnJQ" class="boton1">Carta aleatoria Peticion JQ </button>
+    <button id="btnAX" class="boton1">Carta aleatoria Peticion AX </button>
+    <div class="desc">
+        <h1>¡Cartas Pokemon!</h1>
+        <p>¡Genera una carta de un pokemon al azar con el uso de peticiones!</p>
+        <p>Cada uno de los 5 botones hace lo mismo, PERO, cada uno esta utilizando un tipo de peticion diferente.</p>
+        <p>Cada tarjeta muestra una breve descripcion y una imagen ilustrativa referente a un pokemon o a un personaje.</p>
+    </div>
+    <div id="carta" class="cajacarta"></div>
+    
+    <script>
+/*peticion XmlHttp*/
+window.onload = function () {
+         document.getElementById("btn").addEventListener("click", () => {
+            
+
+        const xhr = new XMLHttpRequest();
+       
+        
+        xhr.addEventListener("readystatechange", function () {
+        if (this.readyState === this.DONE) {
+            console.log(this.responseText);
+
+            let objectoRespuesta=JSON.parse(this.responseText)
+            console.log(objectoRespuesta.value);
+            const imagenes = objectoRespuesta.filter(objeto => objeto.image).map(objeto => objeto.image);
+            const nombres = objectoRespuesta.filter(objeto => objeto.name).map(objeto => objeto.name);
+            console.log(imagenes);
+
+
+            // A continuación, elige un índice aleatorio de la lista de imágenes.
+            const indiceAleatorio = Math.floor(Math.random() * imagenes.length);
+
+            // Finalmente, obtén la URL de la imagen aleatoria seleccionada.
+            const imagenAleatoria = imagenes[indiceAleatorio];
+           
+
+            console.log(imagenAleatoria);
+            
+
+           
+
+            
+            const imgElement = document.createElement("img");
+            const chuckDiv = document.getElementById("carta");
+            imgElement.src = imagenAleatoria+"/high.webp";
+            chuckDiv.innerHTML = '';
+            chuckDiv.appendChild(imgElement);
+        
+           /*  document.getElementById("chuck").innerText=objectoRespuesta.image; */
+        }
+        });
+
+            xhr.open("GET", "https://api.tcgdex.net/v2/es/cards");
+
+            xhr.send();
+        });
+/*peticion Fetch*/
+        document.getElementById("btnFetch").addEventListener("click", () => {
+                fetch("https://api.tcgdex.net/v2/es/cards")
+                .then(objRespuesta => objRespuesta.json())
+                .then(dataJson => {
+                    let objectoRespuesta = dataJson;
+                    console.log(objectoRespuesta.value);
+                    const imagenes = objectoRespuesta.filter(objeto => objeto.image).map(objeto => objeto.image);
+                    console.log(imagenes);
+
+                    // A continuación, elige un índice aleatorio de la lista de imágenes.
+                    const indiceAleatorio = Math.floor(Math.random() * imagenes.length);
+
+                    // Finalmente, obtén la URL de la imagen aleatoria seleccionada.
+                    const imagenAleatoria = imagenes[indiceAleatorio];
+                    console.log(imagenAleatoria);
+
+                    const imgElement = document.createElement("img");
+                    const chuckDiv = document.getElementById("carta");
+                    imgElement.src = imagenAleatoria + "/high.webp";
+                    chuckDiv.innerHTML = '';
+                    chuckDiv.appendChild(imgElement);
+                })
+        });
+/*Peticion Async*/        
+        document.getElementById("btnAsyc").addEventListener("click", async () => {
+
+        let objRespuesta = await fetch("https://api.tcgdex.net/v2/es/cards");
+        let dataJson = await objRespuesta.json();
+        let objectoRespuesta = dataJson;
+                    console.log(objectoRespuesta.value);
+                    const imagenes = objectoRespuesta.filter(objeto => objeto.image).map(objeto => objeto.image);
+                    console.log(imagenes);
+
+                    // A continuación, elige un índice aleatorio de la lista de imágenes.
+                    const indiceAleatorio = Math.floor(Math.random() * imagenes.length);
+
+                    // Finalmente, obtén la URL de la imagen aleatoria seleccionada.
+                    const imagenAleatoria = imagenes[indiceAleatorio];
+                    console.log(imagenAleatoria);
+
+                    const imgElement = document.createElement("img");
+                    const chuckDiv = document.getElementById("carta");
+                    imgElement.src = imagenAleatoria + "/high.webp";
+                    chuckDiv.innerHTML = '';
+                    chuckDiv.appendChild(imgElement);
+        });
+/*Peticion AX*/
+            document.getElementById("btnAX").addEventListener("click", async () => {
+                try {
+                    const response = await axios.get('https://api.tcgdex.net/v2/es/cards');
+                    const dataJson = response.data;
+                    let objectoRespuesta = dataJson;
+                    console.log(dataJson);
+                    const imagenes = objectoRespuesta.filter(objeto => objeto.image).map(objeto => objeto.image);
+                    console.log(imagenes);
+
+                    // A continuación, elige un índice aleatorio de la lista de imágenes.
+                    const indiceAleatorio = Math.floor(Math.random() * imagenes.length);
+
+                    // Finalmente, obtén la URL de la imagen aleatoria seleccionada.
+                    const imagenAleatoria = imagenes[indiceAleatorio];
+                    console.log(imagenAleatoria);
+
+                    const imgElement = document.createElement("img");
+                    const chuckDiv = document.getElementById("carta");
+                    imgElement.src = imagenAleatoria + "/high.webp";
+                    chuckDiv.innerHTML = '';
+                    chuckDiv.appendChild(imgElement);
+                } catch (error) {
+                    console.error("Error:", error);
+                }
+            });
+    }
+ /*Peticion JQ*/
+                    $(document).ready(function () {
+                                document.getElementById("btnJQ").addEventListener("click", () => {
+                                    $.getJSON("https://api.tcgdex.net/v2/es/cards", function (dataJson) {
+                                        let objectoRespuesta = dataJson;
+                                        console.log(objectoRespuesta.value);
+                                        const imagenes = objectoRespuesta.filter(objeto => objeto.image).map(objeto => objeto.image);
+                                        console.log(imagenes);
+
+                                        // A continuación, elige un índice aleatorio de la lista de imágenes.
+                                        const indiceAleatorio = Math.floor(Math.random() * imagenes.length);
+
+                                        // Finalmente, obtén la URL de la imagen aleatoria seleccionada.
+                                        const imagenAleatoria = imagenes[indiceAleatorio];
+                                        console.log(imagenAleatoria);
+
+                                        const imgElement = document.createElement("img");
+                                        const chuckDiv = document.getElementById("carta");
+                                        imgElement.src = imagenAleatoria + "/high.webp";
+                                        chuckDiv.innerHTML = '';
+                                        chuckDiv.appendChild(imgElement);
+                                    });
+
+                                });
+
+                            })
+
+
+        
+
+    </script>
+</body>
+</html>

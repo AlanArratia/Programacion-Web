@@ -13,17 +13,17 @@ const connection = mysql2.createConnection({
     database: 'tallerbd'
 })
 
-app.get('/usuarios',(req,res)=>{//consulta en el diagonal el nombre de la tabla
+app.get('/PELICULAS',(req,res)=>{//consulta en el diagonal el nombre de la tabla
     
-    console.log(req.query.ID_USUARIO);
+    console.log(req.query.ID_PELICULA);
 
     let consulta=''
 
-    if(typeof(req.query.ID_USUARIO)=='undefined'){
-        consulta = `SELECT * FROM usuarios`;
+    if(typeof(req.query.ID_PELICULA)=='undefined'){
+        consulta = `SELECT * FROM PELICULAS`;
     }
     else{
-        consulta = `SELECT * FROM usuarios WHERE ID_USUARIO = ${req.query.ID_USUARIO}`;
+        consulta = `SELECT * FROM PELICULAS WHERE ID_PELICULA = ${req.query.ID_PELICULA}`;
     }
 
     console.log(consulta)
@@ -32,7 +32,7 @@ app.get('/usuarios',(req,res)=>{//consulta en el diagonal el nombre de la tabla
         consulta,
         function(err, results, fields) {
             if(results.length==0){
-                res.json({ mensaje:"ID_USUARIO no existe"});
+                res.json({ mensaje:"ID_PELICULA no existe"});
             } 
             else {
                 res.json(results);

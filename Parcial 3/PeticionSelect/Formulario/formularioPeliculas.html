@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <title>Formulario</title>
+</head>
+<body style="background-color: white; text-align: center;">
+
+<div>
+    <BR></BR>
+    <BR></BR>
+    <H1>PELICULAS</H1>
+</div>
+
+<div class="container mt-5 bg-light">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+
+            <form>
+                <div class="form-group">
+                    <label for="titulo">Nombre:</label>
+                    <input type="text" class="form-control" id="NOMBRE_PELICULA" placeholder="Ingrese nombre de la pelicula" name="NOMBRE_PELICULA">
+                </div>
+                <div class="form-group">
+                    <label for="desarrollador">Duracion:</label>
+                    <input type="text" class="form-control" id="DURACION" placeholder="Ingrese la duracion" name="DURACION">
+                </div>
+                <div class="form-group">
+                    <label for="lanzamiento">Genero:</label>
+                    <input type="text" class="form-control" id="GENERO" placeholder="Ingrese el genero" name="GENERO">
+                </div>
+                <div class="form-group">
+                    <label for="genero">Fecha de lanzamiento:</label>
+                    <input type="datetime" class="form-control" id="FECHA_LANZAMIENTO" placeholder="Ingrese la fecha de lanzamiento" name="FECHA_LANZAMIENTO">
+                </div>
+
+                <button type="button" class="btn btn-dark" id="btn_peticion">ENVIAR</button>
+                <button type="button" class="btn btn-primary" id="btn_agregar">AGREGAR</button>
+                <button type="button" class="btn btn-danger" id="btn_eliminar">ELIMINAR</button>
+                <button type="button" class="btn btn-warning" id="btn_modificar">MODIFICAR</button>
+                <button type="button" class="btn btn-success" id="btn_generar_pdf">Generar PDF</button>
+            </form>
+
+            <script>
+                document.getElementById("btn_peticion").addEventListener("click", async () => {
+                    let ID_PELICULA = prompt("ID de la pelicula");
+
+                    let response = await fetch(`http://localhost:8082/PELICULAS?ID_PELICULA=${ID_PELICULA}`, { method: "GET" });
+                    let data = await response.json();
+
+                    if (data.mensaje) {
+                        alert(data.mensaje);
+                    } else {
+                        document.getElementById("NOMBRE_PELICULA").value = data.NOMBRE_PELICULA || '';
+                        document.getElementById("DURACION").value = data.DURACION || '';
+                        document.getElementById("GENERO").value = data.GENERO || '';
+                        document.getElementById("FECHA_LANZAMIENTO").value = data.FECHA_LANZAMIENTO || '';
+                    }
+                });
+
+                document.getElementById("btn_agregar").addEventListener("click", async () => {
+                    let nombre = document.getElementById("NOMBRE_PELICULA").value;
+                    let duracion = document.getElementById("DURACION").value;
+                    let genero = document.getElementById("GENERO").value;
+                    let fechaLanzamiento = document.getElementById("FECHA_LANZAMIENTO").value;
+
+                    await fetch(`http://localhost:8082/PELICULAS`, {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+                        },
+                        body: JSON.stringify({
+                            NOMBRE_PELICULA: nombre,
+                            DURACION: duracion,
+                            GENERO: genero,
+                            FECHA_LANZAMIENTO: fechaLanzamiento,
+                        }),
+                    })
+                        .then(response => response.json())
+                        .then(data => {
+                            if (data.status === 1) {
+                                alert(data.mensaje);
+                            } else {
+                                alert(data.mensaje);
+                            }
+                        });
+                });
+
+                document.getElementById("btn_eliminar").addEventListener("click", async () => {
+                    let ID_PELICULA = prompt("ID de la pelicula a eliminar");
+
+                    await fetch(`http://localhost:8082/PELICULAS?ID_PELICULA=${ID_PELICULA}`, { method: "DELETE" })
+                        .then(response => response.json())
+                        .then(data => {
+                            if(data.status === 1) {
+                                alert(data.mensaje);
+                            } else {
+                                alert(data.mensaje);
+                            }
+                        });
+                });
+
+                document.getElementById("btn_modificar").addEventListener("click", async () => {
+                    let ID_PELICULA = prompt("ID de la pelicula a modificar");
+                    let nombre = document.getElementById("NOMBRE_PELICULA").value;
+                    let duracion = document.getElementById("DURACION").value;
+                    let genero = document.getElementById("GENERO").value;
+                    let fechaLanzamiento = document.getElementById("FECHA_LANZAMIENTO").value;
+
+                    await fetch(`http://localhost:8082/PELICULAS?ID_PELICULA=${ID_PELICULA}`, {
+                        method: "PUT",
+                        headers: {
+                            "Content-Type": "application/json",
+                        },
+                        body: JSON.stringify({
+                            NOMBRE_PELICULA: nombre,
+                            DURACION: duracion,
+                            GENERO: genero,
+                            FECHA_LANZAMIENTO: fechaLanzamiento,
+                        }),
+                    })
+                        .then(response => response.json())
+                        .then(data => {
+                            if(data.status === 1) {
+                                alert(data.mensaje);
+                            } else {
+                                alert(data.mensaje);
+                            }
+                        });
+                });
+
+                document.getElementById("btn_generar_pdf").addEventListener("click", async () => {
+                    // Lógica para generar el PDF
+                    // Puedes adaptar la lógica existente en tu script.js aquí
+                });
+            </script>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
+
